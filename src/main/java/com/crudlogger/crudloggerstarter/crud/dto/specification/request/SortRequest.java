@@ -15,8 +15,6 @@ import java.io.Serializable;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
- */
-/**
  * A data contract for sorting request there should be a key and direction.
  */
 @Data

@@ -1,5 +1,6 @@
-package com.crudlogger.crudloggerstarter.crud.model.bigint;
+package com.crudlogger.crudloggerstarter.crud.model.audit;
 
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

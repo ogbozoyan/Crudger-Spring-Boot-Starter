@@ -43,14 +43,14 @@ import java.util.Objects;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class LoggingAspect {
+public abstract class LoggingAspect {
     @Autowired
     private HttpServletRequest httpRequest;
     @Autowired
     private HttpServletResponse httpResponse;
     @Autowired
     private LogEntityService logEntityService;
-//    @Autowired
+    //    @Autowired
 //    private UserService userService;
     @Autowired
     private ObjectWriter objectWriter;
@@ -71,9 +71,10 @@ public class LoggingAspect {
         initRequest();
 
         ToLogger toLogger = getLogger(joinPoint);
-
+        //TODO: AbstractUserService
         logEntity.setUserId(null);
         logEntity.setUserLogin(null);
+        /*=================================================*/
         logEntity.setClientRequestIp(httpRequest.getRemoteAddr());
         logEntity.setHttpMethodEnum(toLogger.httpMethod());
         logEntity.setUrl(httpRequest.getRequestURL().toString());
@@ -115,20 +116,28 @@ public class LoggingAspect {
             responseDataAfterChange.setBody(getResponseBody(returnValue));
         }
 
-        logEntity.setResponseDataAfterChange(objectWriter.writeValueAsString(responseDataAfterChange).replaceAll("[\n\r\t]", ""));
+        logEntity.setResponseDataAfterChange(
+                objectWriter.writeValueAsString(responseDataAfterChange).replaceAll("[\n\r\t]", "")
+        );
 
         logEntity.setResponseStatus(String.valueOf(httpResponse != null ? httpResponse.getStatus() : 0));
         logEntity.setActionStatus(String.valueOf(ActionStatusEnum.SUCCESSFULLY));
         logEntity.setDtCreate(Timestamp.valueOf(LocalDateTime.now()));
 
-        logEntity = logEntityService.save(logEntity);
-//        logger.info(objectWriter.writeValueAsString(logEntity).replaceAll("[\n\r\t]", ""));
-        logger.info(logEntity.toString());
+        if (toLogger.isSaveInDataBase()) {
+            logEntityService.save(logEntity);
+        }
+        if (toLogger.isPrintToTerminal()) {
+            logger.info(toLogger.printAsJson() ?
+                    objectWriter.writeValueAsString(logEntity).replaceAll("[\n\r\t]", "")
+                    : logEntity.toString());
+        }
 
     }
 
     @AfterThrowing(value = "@annotation(com.crudlogger.crudloggerstarter.aspect.ToLogger)", throwing = "exception")
-    public void afterError(Throwable exception) {
+    public void afterError(JoinPoint joinPoint, Throwable exception) throws IOException {
+        ToLogger toLogger = getLogger(joinPoint);
         initResponse();
         initRequest();
 
@@ -139,9 +148,14 @@ public class LoggingAspect {
         logEntity.setStackTraceOnError(ExceptionUtils.getMessage(exception));
         logEntity.setDtCreate(Timestamp.valueOf(LocalDateTime.now()));
 
-        logEntityService.save(logEntity);
-//        logger.info(objectWriter.writeValueAsString(logEntity).replaceAll("[\n\r\t]", "")); // вариант с Json
-        logger.info(logEntity.toString());
+        if (toLogger.isSaveInDataBase()) {
+            logEntityService.save(logEntity);
+        }
+        if (toLogger.isPrintToTerminal()) {
+            logger.info(toLogger.printAsJson() ?
+                    objectWriter.writeValueAsString(logEntity).replaceAll("[\n\r\t]", "")
+                    : logEntity.toString());
+        }
     }
 
 

@@ -2,10 +2,9 @@ package com.crudlogger.crudloggerstarter.crud.controller;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.bigint.AbstractEntity;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ public interface AbstractController<T extends AbstractEntity> {
     @Operation(summary = "Получить постранично", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    ResponseEntity<AbstractResponseDTO> getPage(Pageable pageable);
+    ResponseEntity<AbstractResponseDTO> getPage(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size);
 
     @Operation(summary = "Поиск по фильтрам", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)

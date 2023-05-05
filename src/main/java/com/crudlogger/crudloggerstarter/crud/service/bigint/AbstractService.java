@@ -2,19 +2,18 @@ package com.crudlogger.crudloggerstarter.crud.service.bigint;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.bigint.AbstractEntity;
-import org.springframework.data.domain.Pageable;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 
-public interface AbstractService<T extends AbstractEntity> {
-    T save(T entity);
+public interface AbstractService<E extends AbstractEntity> {
+    E save(E entity);
 
-    T update(T entity);
+    E update(E entity);
 
-    T delete(Long id);
+    E delete(Long id);
 
-    T findById(Long id);
+    E findById(Long id);
 
-    AbstractResponseDTO findAll(Pageable pageable);
+    AbstractResponseDTO findAll(Integer page, Integer size);
 
     AbstractResponseDTO searchFilter(SearchRequest request);
 }

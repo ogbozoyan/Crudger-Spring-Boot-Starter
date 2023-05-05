@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.model.bigint;
+package com.crudlogger.crudloggerstarter.crud.model;
 
 
 import lombok.AllArgsConstructor;

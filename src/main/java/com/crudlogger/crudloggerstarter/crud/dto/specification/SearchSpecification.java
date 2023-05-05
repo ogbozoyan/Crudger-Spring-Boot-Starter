@@ -18,13 +18,11 @@ import java.util.List;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
+ * Generic class that implements the Specification interface and going to
+ * pass in our own constraint to construct actual query
  */
 @Slf4j
 @AllArgsConstructor
-/*
-  Generic class that implements the Specification interface and going to
-  pass in our own constraint to construct actual query
- */
 public class SearchSpecification<T> implements Specification<T> {
     public static final int DEFAULT_ITEMS_SIZE = 10;
     @Serial
@@ -43,12 +41,16 @@ public class SearchSpecification<T> implements Specification<T> {
             for (int i = 1; i < nestedFields.length; i++) {
                 path = path.get(nestedFields[i]);
             }
-            log.info(path.getAlias());
             predicate = filter.getOperator().build(root, cb, filter, predicate, path);
         }
 
         for (SortRequest sort : this.request.getSorts()) {
-            orders.add(sort.getDirection().build(root, cb, sort));
+            String[] nestedFields = sort.getKey().split("\\.");
+            Path<Object> path = root.get(nestedFields[0]);
+            for (int i = 1; i < nestedFields.length; i++) {
+                path = path.get(nestedFields[i]);
+            }
+            orders.add(sort.getDirection().build(root, cb, sort, path));
         }
 
         query.orderBy(orders);
@@ -61,5 +63,4 @@ public class SearchSpecification<T> implements Specification<T> {
         page = page == 0 ? 1 : page;
         return PageRequest.of(page - 1, size);
     }
-
 }

@@ -18,6 +18,7 @@ import java.util.Objects;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
+ * This is a main request that be used from REST API.
  */
 @Data
 @Builder
@@ -26,9 +27,6 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Slf4j
-/*
-  This is a main request that be used from REST API.
- */
 public class SearchRequest implements Serializable {
 
     @Serial
@@ -43,7 +41,7 @@ public class SearchRequest implements Serializable {
     private Integer size;
 
     public List<FilterRequest> getFilters() {
-        if (Objects.isNull(this.filters)) return new ArrayList<>();
+        if (Objects.isNull(this.filters)) this.filters = new ArrayList<>();
         return this.filters;
     }
 
@@ -51,136 +49,5 @@ public class SearchRequest implements Serializable {
         if (Objects.isNull(this.sorts)) return new ArrayList<>();
         return this.sorts;
     }
-    /*
-      Request examples:
-      =======================Without Filter and Sorting============================================
-      {
-          "filters": [],
-          "sorts": [],
-          "page": null,
-          "size": null
-      }
-      =======================Filter by Name and Sort by Release Date ASC===========================
-      Filter name equal to filterName
-      {
-          "filters": [
-              {
-                  "key": "name",
-                  "operator": "EQUAL",
-                  "field_type": "STRING",
-                  "value": "filterName"
-              }
-          ],
-          "sorts": [
-              {
-                  "key": "releaseDate",
-                  "direction": "ASC"
-              }
-          ],
-          "page": null,
-          "size": null
-      }
-      =======================Filter name not equal to filterName===================================
-       {
-          "filters": [
-              {
-                  "key": "name",
-                  "operator": "NOT_EQUAL",
-                  "field_type": "STRING",
-                  "value": "filterName"
-              }
-          ],
-          "sorts": [
-              {
-                  "key": "releaseDate",
-                  "direction": "ASC"
-              }
-          ],
-          "page": null,
-          "size": null
-      }
-      =======================Filter name not equal to filterName and size 1 response================
-      {
-          "filters": [
-              {
-                  "key": "name",
-                  "operator": "NOT_EQUAL",
-                  "field_type": "STRING",
-                  "value": "filterName"
-              }
-          ],
-          "sorts": [
-              {
-                  "key": "releaseDate",
-                  "direction": "ASC"
-              }
-          ],
-          "page": null,
-          "size": 1
-      }
-      =======================Filter name like and sort by release data DESC================
-      {
-          "filters": [
-              {
-                  "key": "name",
-                  "operator": "LIKE",
-                  "field_type": "STRING",
-                  "value": "Red"
-              }
-          ],
-          "sorts": [
-              {
-                  "key": "releaseDate",
-                  "direction": "DESC"
-              }
-          ],
-          "page": null,
-          "size": null
-      }
-      =======================Filter kernel in===============================================
-      {
-          "filters": [
-              {
-                  "key": "kernel",
-                  "operator": "IN",
-                  "field_type": "STRING",
-                  "values": ["5.13", "5.8"]
-              }
-          ],
-          "sorts": [],
-          "page": null,
-          "size": null
-      }
-      =======================Filter using between===============================================
-      Filter release date
-      {
-          "filters": [
-              {
-                  "key": "releaseDate",
-                  "operator": "BETWEEN",
-                  "field_type": "DATE",
-                  "value": "01-03-2022 00:00:00",
-                  "value_to": "11-03-2022 23:59:59"
-              }
-          ],
-          "sorts": [],
-          "page": null,
-          "size": null
-      }
-      Or
-       {
-          "filters": [
-              {
-                  "key": "usages",
-                  "operator": "BETWEEN",
-                  "field_type": "INTEGER",
-                  "value": 100,
-                  "value_to": 250
-              }
-          ],
-          "sorts": [],
-          "page": null,
-          "size": null
-      }
-     */
+
 }

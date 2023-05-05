@@ -9,13 +9,11 @@ import java.lang.reflect.ParameterizedType;
 /**
  * @author ogbozoyan
  * @date 03.03.2023
+ * To get generic class
  */
 @Data
 @NoArgsConstructor
 @Slf4j
-/*
-    * To get generic class
- */
 public class Reflection {
     public static Class<?> getClassGeneric(Object obj){
         ParameterizedType genericSuperclass = (ParameterizedType) obj.getClass().getGenericSuperclass();

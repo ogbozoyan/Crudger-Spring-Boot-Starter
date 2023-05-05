@@ -10,10 +10,6 @@ import java.util.List;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
- */
-
-
-/**
  * This is a logical for predicate of Criteria API likes EQUAL, NOT_EQUAL, LIKE, IN, and BETWEEN.
  */
 @Slf4j
@@ -41,7 +37,7 @@ public enum Operator {
      */
     LIKE { //String
         public <T> Predicate build(Root<T> root, CriteriaBuilder cb, FilterRequest request, Predicate predicate, Path<Object> path) {
-            return cb.and(cb.like(path.as(String.class), "%" + request.getValue().toString() + "%"), predicate);
+            return cb.and(cb.like(cb.lower(path.as(String.class)), "%" + request.getValue().toString().toLowerCase() + "%"), predicate);
         }
     },
     /**
