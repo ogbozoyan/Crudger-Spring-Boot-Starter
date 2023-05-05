@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends AbstractRepository<T>> implements AbstractService<T> {
+public abstract class AbstractServiceImpl<E extends AbstractEntity, R extends AbstractRepository<E>> implements AbstractService<E> {
     protected final R repository;
 
     @Autowired
@@ -26,7 +26,7 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional
-    public T save(T entity) {
+    public E save(E entity) {
         try {
             return repository.save(entity);
         } catch (Exception e) {
@@ -37,9 +37,9 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional
-    public T update(T entity) {
+    public E update(E entity) {
 
-        T entityFromBd = repository.findById(entity.getId()).orElseThrow(() -> new FindException("Entity not found " + entity));
+        E entityFromBd = repository.findById(entity.getId()).orElseThrow(() -> new FindException("Entity not found " + entity));
         patchingMapper.map(entity, entityFromBd);
         try {
             return repository.saveAndFlush(entityFromBd);
@@ -51,9 +51,9 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional
-    public T delete(Long id) {
+    public E delete(Long id) {
         try {
-            T entity = repository.findById(id).orElseThrow(() -> new DeleteNotFoundException("Entity not found with id: " + id));
+            E entity = repository.findById(id).orElseThrow(() -> new DeleteNotFoundException("Entity not found with id: " + id));
             repository.delete(entity);
             return entity;
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional(readOnly = true)
-    public T findById(Long id) {
+    public E findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new FindException(" Entity not found with id " + id));
     }
 
@@ -72,18 +72,17 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
     @Transactional(readOnly = true)
     public AbstractResponseDTO findAll(Integer page, Integer size) {
         try {
-            if (page != null || size != null) {
+            if (page != null && size != null) {
                 PageRequest request = PageRequest.of(page, size);
-                Page<T> pageResponse = repository.findAll(request);
+                Page<E> pageResponse = repository.findAll(request);
                 return new AbstractResponseDTO(pageResponse.getContent(), pageResponse.getTotalElements(), pageResponse.getTotalPages());
             } else {
-                List<T> fullData = repository.findAll();
+                List<E> fullData = repository.findAll();
                 return new AbstractResponseDTO(fullData, (long) fullData.size(), 1);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-
             throw new PageException(e.getClass().getSimpleName() + " Page Exception: " + e.getMessage());
         }
     }
@@ -92,9 +91,9 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
     @Transactional(readOnly = true)
     public AbstractResponseDTO searchFilter(SearchRequest request) {
         try {
-            SearchSpecification<T> specification = new SearchSpecification<>(request);
+            SearchSpecification<E> specification = new SearchSpecification<>(request);
             Pageable pageable = SearchSpecification.getPageable(request.getPage(), request.getSize());
-            Page<T> page = repository.findAll(specification, pageable);
+            Page<E> page = repository.findAll(specification, pageable);
             return new AbstractResponseDTO(page.getContent(), page.getTotalElements(), page.getTotalPages());
         } catch (Exception e) {
             e.printStackTrace();

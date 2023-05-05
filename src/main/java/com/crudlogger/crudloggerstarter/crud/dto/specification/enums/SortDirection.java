@@ -12,11 +12,9 @@ import javax.persistence.criteria.Root;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
+ * This is used when need to sort result query. It can be ascending or descending direction.
  */
 @Slf4j
-/*
-  This is used when need to sort result query. It can be ascending or descending direction.
- */
 public enum SortDirection {
     /**
      * ASC	SELECT * FROM table ORDER BY field ASC

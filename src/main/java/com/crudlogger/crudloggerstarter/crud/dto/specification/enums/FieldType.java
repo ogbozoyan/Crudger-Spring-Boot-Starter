@@ -7,9 +7,6 @@ import java.sql.Timestamp;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
- */
-
-/**
  *  Define enum of field type which is can be used to parse into data type.
  */
 @Slf4j

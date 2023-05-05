@@ -18,13 +18,11 @@ import java.util.List;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
+ * Generic class that implements the Specification interface and going to
+ * pass in our own constraint to construct actual query
  */
 @Slf4j
 @AllArgsConstructor
-/*
-  Generic class that implements the Specification interface and going to
-  pass in our own constraint to construct actual query
- */
 public class SearchSpecification<T> implements Specification<T> {
     public static final int DEFAULT_ITEMS_SIZE = 10;
     @Serial

@@ -19,4 +19,7 @@ public @interface ToLogger {
 
     HttpMethodEnum httpMethod() default HttpMethodEnum.UNDEFINED;
     boolean returnResponse() default false;
+    boolean isPrintToTerminal() default true;
+    boolean isSaveInDataBase() default false;
+    boolean printAsJson() default false;
 }

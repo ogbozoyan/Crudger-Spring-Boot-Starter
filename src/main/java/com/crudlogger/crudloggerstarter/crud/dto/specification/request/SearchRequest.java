@@ -18,6 +18,7 @@ import java.util.Objects;
 /**
  * @author ogbozoyan
  * @date 01.03.2023
+ * This is a main request that be used from REST API.
  */
 @Data
 @Builder
@@ -26,9 +27,6 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Slf4j
-/*
-  This is a main request that be used from REST API.
- */
 public class SearchRequest implements Serializable {
 
     @Serial
