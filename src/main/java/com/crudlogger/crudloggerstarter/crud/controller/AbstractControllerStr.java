@@ -2,7 +2,7 @@ package com.crudlogger.crudloggerstarter.crud.controller;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.str.AbstractEntityStr;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntityStr;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.data.domain.Pageable;

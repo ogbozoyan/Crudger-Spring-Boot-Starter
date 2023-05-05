@@ -3,7 +3,7 @@ package com.crudlogger.crudloggerstarter.aspect.logger.model;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionDomainEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
-import com.crudlogger.crudloggerstarter.crud.model.bigint.AbstractEntity;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

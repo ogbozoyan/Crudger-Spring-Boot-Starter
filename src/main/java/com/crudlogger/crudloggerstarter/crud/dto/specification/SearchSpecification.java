@@ -43,12 +43,16 @@ public class SearchSpecification<T> implements Specification<T> {
             for (int i = 1; i < nestedFields.length; i++) {
                 path = path.get(nestedFields[i]);
             }
-            log.info(path.getAlias());
             predicate = filter.getOperator().build(root, cb, filter, predicate, path);
         }
 
         for (SortRequest sort : this.request.getSorts()) {
-            orders.add(sort.getDirection().build(root, cb, sort));
+            String[] nestedFields = sort.getKey().split("\\.");
+            Path<Object> path = root.get(nestedFields[0]);
+            for (int i = 1; i < nestedFields.length; i++) {
+                path = path.get(nestedFields[i]);
+            }
+            orders.add(sort.getDirection().build(root, cb, sort, path));
         }
 
         query.orderBy(orders);
@@ -61,5 +65,4 @@ public class SearchSpecification<T> implements Specification<T> {
         page = page == 0 ? 1 : page;
         return PageRequest.of(page - 1, size);
     }
-
 }

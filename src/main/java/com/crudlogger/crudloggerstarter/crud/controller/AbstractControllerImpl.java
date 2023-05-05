@@ -6,13 +6,13 @@ import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.bigint.AbstractEntity;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 import com.crudlogger.crudloggerstarter.crud.service.bigint.AbstractService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 public abstract class AbstractControllerImpl<E extends AbstractEntity, S extends AbstractService<E>>
@@ -22,8 +22,8 @@ public abstract class AbstractControllerImpl<E extends AbstractEntity, S extends
 
     @Override
     @ToLogger(action = ActionEnum.READ, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.GET)
-    public ResponseEntity<AbstractResponseDTO> getPage(Pageable pageable) {
-        return ResponseEntity.ok(service.findAll(pageable));
+    public ResponseEntity<AbstractResponseDTO> getPage(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        return ResponseEntity.ok(service.findAll(page,size));
     }
 
     @Override

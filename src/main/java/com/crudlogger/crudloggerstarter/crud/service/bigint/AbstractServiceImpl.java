@@ -4,14 +4,17 @@ import com.crudlogger.crudloggerstarter.crud.controller.advice.*;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.SearchSpecification;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.bigint.AbstractEntity;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
 import com.crudlogger.crudloggerstarter.crud.repository.AbstractRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends AbstractRepository<T>> implements AbstractService<T> {
@@ -58,6 +61,7 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
             throw new DeleteException(e.getClass().getSimpleName() + " Can't delete with id: " + id + " " + e.getMessage());
         }
     }
+
     @Override
     @Transactional(readOnly = true)
     public T findById(Long id) {
@@ -66,10 +70,17 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional(readOnly = true)
-    public AbstractResponseDTO findAll(Pageable pageable) {
+    public AbstractResponseDTO findAll(Integer page, Integer size) {
         try {
-            Page<T> page = repository.findAll(pageable);
-            return new AbstractResponseDTO(page.getContent(), page.getTotalElements(), page.getTotalPages());
+            if (page != null || size != null) {
+                PageRequest request = PageRequest.of(page, size);
+                Page<T> pageResponse = repository.findAll(request);
+                return new AbstractResponseDTO(pageResponse.getContent(), pageResponse.getTotalElements(), pageResponse.getTotalPages());
+            } else {
+                List<T> fullData = repository.findAll();
+                return new AbstractResponseDTO(fullData, (long) fullData.size(), 1);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
 

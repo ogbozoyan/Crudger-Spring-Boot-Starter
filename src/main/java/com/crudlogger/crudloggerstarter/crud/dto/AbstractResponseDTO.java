@@ -1,6 +1,9 @@
 package com.crudlogger.crudloggerstarter.crud.dto;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,6 +13,9 @@ import java.io.Serializable;
  */
 
 @Data
+@Builder
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class AbstractResponseDTO implements Serializable {
     private Object content;
     private Long totalElements;

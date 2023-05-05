@@ -4,7 +4,7 @@ import com.crudlogger.crudloggerstarter.crud.controller.advice.*;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.SearchSpecification;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.str.AbstractEntityStr;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntityStr;
 import com.crudlogger.crudloggerstarter.crud.repository.AbstractRepositoryStr;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

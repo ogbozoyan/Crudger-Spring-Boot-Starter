@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.model.str;
+package com.crudlogger.crudloggerstarter.crud.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

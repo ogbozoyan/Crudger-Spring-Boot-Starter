@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 /**
@@ -21,19 +22,19 @@ public enum SortDirection {
      * ASC	SELECT * FROM table ORDER BY field ASC
      */
     ASC {
-        public <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request) {
-            return cb.asc(root.get(request.getKey()));
+        public <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request, Path<Object> path) {
+            return cb.asc(path);
         }
     },
     /**
      * DESC	SELECT * FROM table ORDER BY field DESC
      */
     DESC {
-        public <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request) {
-            return cb.desc(root.get(request.getKey()));
+        public <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request, Path<Object> path) {
+            return cb.desc(path);
         }
     };
 
-    public abstract <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request);
+    public abstract <T> Order build(Root<T> root, CriteriaBuilder cb, SortRequest request, Path<Object> path);
 
 }

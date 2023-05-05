@@ -6,7 +6,7 @@ import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.str.AbstractEntityStr;
+import com.crudlogger.crudloggerstarter.crud.model.AbstractEntityStr;
 import com.crudlogger.crudloggerstarter.crud.service.AbstractServiceStr;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
