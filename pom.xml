@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.crud-logger</groupId>
-	<artifactId>crud-logger-started</artifactId>
+	<artifactId>crud-logger-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crud-logger-started</name>
+	<name>crud-logger-starter</name>
 	<description>Simple CRUD and Logger for Spring Boot applications</description>
 	<properties>
 		<java.version>17</java.version>
