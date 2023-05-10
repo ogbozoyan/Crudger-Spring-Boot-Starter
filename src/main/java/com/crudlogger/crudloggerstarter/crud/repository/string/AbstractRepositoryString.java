@@ -1,6 +1,5 @@
 package com.crudlogger.crudloggerstarter.crud.repository.string;
 
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
 import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityString;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

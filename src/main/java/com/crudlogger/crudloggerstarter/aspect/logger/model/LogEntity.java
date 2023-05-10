@@ -3,7 +3,7 @@ package com.crudlogger.crudloggerstarter.aspect.logger.model;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionDomainEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityBigint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 @Table(name = "system_f_log")
-public class LogEntity extends AbstractEntityLong implements Serializable {
+public class LogEntity extends AbstractEntityBigint implements Serializable {
     @Column(name = "user_id")
     private String userId;
     @Column(name = "user_login")

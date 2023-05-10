@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.controller.Abstract.Long;
+package com.crudlogger.crudloggerstarter.crud.controller.string;
 
 import com.crudlogger.crudloggerstarter.aspect.ToLogger;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionDomainEnum;
@@ -6,8 +6,8 @@ import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
-import com.crudlogger.crudloggerstarter.crud.service.Long.AbstractServiceLong;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityString;
+import com.crudlogger.crudloggerstarter.crud.service.string.AbstractServiceString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
-public abstract class AbstractControllerLongImpl<E extends AbstractEntityLong, S extends AbstractServiceLong<E>>
-        implements AbstractControllerLong<E> {
+public abstract class AbstractControllerStringImpl<E extends AbstractEntityString, S extends AbstractServiceString<E>>
+        implements AbstractControllerString<E> {
 
-    protected final AbstractServiceLong<E> service;
+    protected final AbstractServiceString<E> service;
 
     @Override
     @ToLogger(action = ActionEnum.READ, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.GET)
@@ -28,7 +28,7 @@ public abstract class AbstractControllerLongImpl<E extends AbstractEntityLong, S
 
     @Override
     @ToLogger(action = ActionEnum.READ, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.GET)
-    public ResponseEntity<E> getOne(@PathVariable Long id) {
+    public ResponseEntity<E> getOne(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -52,7 +52,7 @@ public abstract class AbstractControllerLongImpl<E extends AbstractEntityLong, S
 
     @Override
     @ToLogger(action = ActionEnum.DELETE, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.DELETE, returnResponse = true)
-    public ResponseEntity<E> delete(@PathVariable Long id) {
+    public ResponseEntity<E> delete(@PathVariable String id) {
         return ResponseEntity.ok(service.delete(id));
     }
 }

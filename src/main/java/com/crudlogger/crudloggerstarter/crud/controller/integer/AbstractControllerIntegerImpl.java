@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.controller.Abstract.Integer;
+package com.crudlogger.crudloggerstarter.crud.controller.integer;
 
 import com.crudlogger.crudloggerstarter.aspect.ToLogger;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionDomainEnum;
@@ -7,8 +7,6 @@ import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
 import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityInteger;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
-import com.crudlogger.crudloggerstarter.crud.service.Long.AbstractServiceLong;
 import com.crudlogger.crudloggerstarter.crud.service.integer.AbstractServiceInteger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

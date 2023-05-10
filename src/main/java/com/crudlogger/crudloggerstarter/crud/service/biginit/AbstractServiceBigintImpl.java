@@ -1,11 +1,11 @@
-package com.crudlogger.crudloggerstarter.crud.service.Long;
+package com.crudlogger.crudloggerstarter.crud.service.biginit;
 
 import com.crudlogger.crudloggerstarter.crud.controller.advice.*;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.SearchSpecification;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
-import com.crudlogger.crudloggerstarter.crud.repository.Long.AbstractRepositoryLong;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityBigint;
+import com.crudlogger.crudloggerstarter.crud.repository.biginit.AbstractRepositoryBigint;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class AbstractServiceLongImpl<E extends AbstractEntityLong, R extends AbstractRepositoryLong<E>> implements AbstractServiceLong<E> {
+public abstract class AbstractServiceBigintImpl<E extends AbstractEntityBigint, R extends AbstractRepositoryBigint<E>> implements AbstractServiceBigint<E> {
     protected final R repository;
 
     //@Autowired

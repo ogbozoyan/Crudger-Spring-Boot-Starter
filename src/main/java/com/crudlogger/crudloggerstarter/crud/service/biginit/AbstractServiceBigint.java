@@ -1,10 +1,10 @@
-package com.crudlogger.crudloggerstarter.crud.service.Long;
+package com.crudlogger.crudloggerstarter.crud.service.biginit;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityBigint;
 
-public interface AbstractServiceLong<E extends AbstractEntityLong> {
+public interface AbstractServiceBigint<E extends AbstractEntityBigint> {
     E save(E entity);
 
     E update(E entity);

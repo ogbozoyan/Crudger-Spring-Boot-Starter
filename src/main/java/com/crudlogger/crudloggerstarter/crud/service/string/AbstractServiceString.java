@@ -2,7 +2,6 @@ package com.crudlogger.crudloggerstarter.crud.service.string;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
 import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityString;
 
 public interface

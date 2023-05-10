@@ -1,6 +1,6 @@
 package com.crudlogger.crudloggerstarter.crud.model.audit;
 
-import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityLong;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityBigint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AbstractAuditEntity extends AbstractEntityLong implements Serializable {
+public abstract class AbstractAuditEntity extends AbstractEntityBigint implements Serializable {
     @CreatedBy
     @Column(name = "created_by")
     protected String createdBy;

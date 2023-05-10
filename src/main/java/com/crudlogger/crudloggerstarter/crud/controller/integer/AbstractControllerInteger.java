@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.controller.Abstract.Integer;
+package com.crudlogger.crudloggerstarter.crud.controller.integer;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
