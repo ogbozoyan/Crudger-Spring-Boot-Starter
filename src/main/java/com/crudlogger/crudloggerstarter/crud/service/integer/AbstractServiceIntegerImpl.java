@@ -1,14 +1,15 @@
-package com.crudlogger.crudloggerstarter.crud.service.bigint;
+package com.crudlogger.crudloggerstarter.crud.service.integer;
 
 import com.crudlogger.crudloggerstarter.crud.controller.advice.*;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.SearchSpecification;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
-import com.crudlogger.crudloggerstarter.crud.repository.AbstractRepository;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityInteger;
+import java.lang.Integer;
+
+import com.crudlogger.crudloggerstarter.crud.repository.integer.AbstractRepositoryInteger;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class AbstractServiceImpl<E extends AbstractEntity, R extends AbstractRepository<E>> implements AbstractService<E> {
+public abstract class AbstractServiceIntegerImpl<E extends AbstractEntityInteger, R extends AbstractRepositoryInteger<E>> implements AbstractServiceInteger<E> {
     protected final R repository;
 
-    @Autowired
+    //@Autowired
     protected ModelMapper patchingMapper;
 
 
@@ -51,7 +52,7 @@ public abstract class AbstractServiceImpl<E extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional
-    public E delete(Long id) {
+    public E delete(Integer id) {
         try {
             E entity = repository.findById(id).orElseThrow(() -> new DeleteNotFoundException("Entity not found with id: " + id));
             repository.delete(entity);
@@ -64,7 +65,7 @@ public abstract class AbstractServiceImpl<E extends AbstractEntity, R extends Ab
 
     @Override
     @Transactional(readOnly = true)
-    public E findById(Long id) {
+    public E findById(Integer id) {
         return repository.findById(id).orElseThrow(() -> new FindException(" Entity not found with id " + id));
     }
 

@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.model;
+package com.crudlogger.crudloggerstarter.crud.model.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class AbstractEntity implements Serializable {
+public abstract class AbstractEntityInteger implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    protected Integer id;
 }
