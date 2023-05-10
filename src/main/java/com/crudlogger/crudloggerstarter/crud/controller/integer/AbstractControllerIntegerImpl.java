@@ -1,4 +1,4 @@
-package com.crudlogger.crudloggerstarter.crud.controller;
+package com.crudlogger.crudloggerstarter.crud.controller.integer;
 
 import com.crudlogger.crudloggerstarter.aspect.ToLogger;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionDomainEnum;
@@ -6,8 +6,8 @@ import com.crudlogger.crudloggerstarter.aspect.logger.model.json.ActionEnum;
 import com.crudlogger.crudloggerstarter.aspect.logger.model.json.HttpMethodEnum;
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
-import com.crudlogger.crudloggerstarter.crud.service.bigint.AbstractService;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityInteger;
+import com.crudlogger.crudloggerstarter.crud.service.integer.AbstractServiceInteger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
-public abstract class AbstractControllerImpl<E extends AbstractEntity, S extends AbstractService<E>>
-        implements AbstractController<E> {
+public abstract class AbstractControllerIntegerImpl<E extends AbstractEntityInteger, S extends AbstractServiceInteger<E>>
+        implements AbstractControllerInteger<E> {
 
-    protected final AbstractService<E> service;
+    protected final AbstractServiceInteger<E> service;
 
     @Override
     @ToLogger(action = ActionEnum.READ, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.GET)
@@ -28,7 +28,7 @@ public abstract class AbstractControllerImpl<E extends AbstractEntity, S extends
 
     @Override
     @ToLogger(action = ActionEnum.READ, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.GET)
-    public ResponseEntity<E> getOne(@PathVariable Long id) {
+    public ResponseEntity<E> getOne(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -52,7 +52,7 @@ public abstract class AbstractControllerImpl<E extends AbstractEntity, S extends
 
     @Override
     @ToLogger(action = ActionEnum.DELETE, actionDomain = ActionDomainEnum.CRUD, httpMethod = HttpMethodEnum.DELETE, returnResponse = true)
-    public ResponseEntity<E> delete(@PathVariable Long id) {
+    public ResponseEntity<E> delete(@PathVariable Integer id) {
         return ResponseEntity.ok(service.delete(id));
     }
 }

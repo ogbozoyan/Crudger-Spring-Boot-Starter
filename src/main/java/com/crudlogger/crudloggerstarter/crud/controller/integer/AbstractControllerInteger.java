@@ -1,8 +1,8 @@
-package com.crudlogger.crudloggerstarter.crud.controller;
+package com.crudlogger.crudloggerstarter.crud.controller.integer;
 
 import com.crudlogger.crudloggerstarter.crud.dto.AbstractResponseDTO;
 import com.crudlogger.crudloggerstarter.crud.dto.specification.request.SearchRequest;
-import com.crudlogger.crudloggerstarter.crud.model.AbstractEntity;
+import com.crudlogger.crudloggerstarter.crud.model.entity.AbstractEntityInteger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-public interface AbstractController<T extends AbstractEntity> {
+public interface AbstractControllerInteger<T extends AbstractEntityInteger> {
     @Operation(summary = "Получить постранично", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
@@ -24,7 +24,7 @@ public interface AbstractController<T extends AbstractEntity> {
     @Operation(summary = "Получить по id", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
-    ResponseEntity<T> getOne(@PathVariable Long id);
+    ResponseEntity<T> getOne(@PathVariable Integer id);
 
     @Operation(summary = "Обновить данные", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)
@@ -39,5 +39,5 @@ public interface AbstractController<T extends AbstractEntity> {
     @Operation(summary = "Удалить сущность по id", security = @SecurityRequirement(name = "bearerAuth"))
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("{id}")
-    ResponseEntity<T> delete(@PathVariable Long id);
+    ResponseEntity<T> delete(@PathVariable Integer id);
 }
