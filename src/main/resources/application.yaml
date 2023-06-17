@@ -1,0 +1,5 @@
+crudger:
+
+spring:
+  application:
+    name: CRUDGER
