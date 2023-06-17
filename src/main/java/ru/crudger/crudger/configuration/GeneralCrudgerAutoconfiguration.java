@@ -13,12 +13,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.retry.annotation.EnableRetry;
 import ru.crudger.crudger.aspect.CachingRequestBodyFilter;
 import ru.crudger.crudger.aspect.CachingResponseBodyFilter;
 import ru.crudger.crudger.aspect.LoggingAspect;
+import ru.crudger.crudger.aspect.logger.model.LogEntity;
+import ru.crudger.crudger.aspect.logger.repository.LogEntityRepository;
+import ru.crudger.crudger.aspect.logger.service.LogEntityService;
 
 import java.util.List;
 
@@ -30,7 +34,11 @@ import java.util.List;
  */
 @EnableRetry
 @EnableConfigurationProperties({CrudgerProperties.class})
-
+@ComponentScan(basePackages = "ru.crudger.crudger", basePackageClasses = {LoggingAspect.class,
+        LogEntity.class,
+        LogEntityRepository.class,
+        LogEntityService.class
+})
 @Configuration
 @SecurityScheme(
         name = "bearerAuth",
